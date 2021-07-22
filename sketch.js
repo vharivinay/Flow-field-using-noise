@@ -15,13 +15,13 @@ var makeCirc = "F";
 let p5Canvas;
 
 function setup() {
-  p5Canvas = createCanvas(900, 900);
+  p5Canvas = createCanvas(1920, 1080);
   frameRate(60);
   background(30);
   angleMode(DEGREES);
   noiseDetail(1);
 
-  var density = 100;
+  var density = 250;
   var space = width / density;
 
   for (var x = 0; x < width; x += space) {
@@ -37,17 +37,17 @@ function setup() {
     colors.push(random(255));
   }
 
-  //speed = random(0.005, 0.01);
-  speed = 0.02;
+  speed = 0.025;
 }
 
 function draw() {
-  if (frameCount === 1) capturer.start();
+  // uncomment below for video capture
+  //if (frameCount === 1) capturer.start();
   noStroke();
   fill(255);
 
-  if (frameCount * 2 <= points.length) {
-    var max = frameCount * 2;
+  if (frameCount * 5 <= points.length) {
+    var max = frameCount * 5;
   } else {
     var max = points.length;
   }
@@ -64,7 +64,7 @@ function draw() {
       100
     );
 
-    fill(r, g, b, alpha);
+    fill(r, g, b);
 
     var angle = map(
       noise(points[i].x * speed, points[i].y * speed),
@@ -85,15 +85,12 @@ function draw() {
     }
   }
 
-  capturer.capture(p5Canvas.canvas);
-  if (frameCount === 1000) {
+  // uncomment below for video capture
+  //capturer.capture(p5Canvas.canvas);
+  if (frameCount === 1500) {
     noLoop();
-    capturer.stop();
-    capturer.save();
+    // uncomment below for video capture
+    /* capturer.stop();
+    capturer.save(); */
   }
 }
-
-/* function mouseClicked() {
-  title = "flowField" + str(frameCount);
-  saveCanvas(title, "png");
-} */
