@@ -1,6 +1,6 @@
 const capturer = new CCapture({
-  framerate: 30,
-  format: "gif",
+  framerate: 60,
+  format: "webm",
   workersPath: "/libraries/",
   name: "flowField",
   quality: 100,
@@ -30,7 +30,7 @@ function setup() {
 
 function draw() {
   // uncomment below for video capture
-  if (frameCount === 1) capturer.start();
+  //if (frameCount === 1) capturer.start();
   if (particle) {
     background(30);
   }
@@ -96,13 +96,13 @@ function draw() {
   }
 
   // uncomment below for video capture
-  capturer.capture(p5Canvas.canvas);
+  //capturer.capture(p5Canvas.canvas);
   if (frameCount % 100 === 0) {
     if (frameCount === 1800) {
       noLoop();
       // uncomment below for video capture
-      capturer.stop();
-      capturer.save();
+      /* capturer.stop();
+      capturer.save(); */
     }
     [points, colors, speed] = genPoints(random(1, 10));
     noiseDetail(random(1, 1000));
