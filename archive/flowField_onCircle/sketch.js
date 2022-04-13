@@ -1,8 +1,8 @@
 const capturer = new CCapture({
   framerate: 60,
-  format: "webm",
-  workersPath: "/libraries/",
-  name: "flowField",
+  format: 'webm',
+  workersPath: '/libraries/',
+  name: 'flowField',
   quality: 100,
   verbose: true,
 });
@@ -11,7 +11,7 @@ let points;
 let speed;
 
 let colors;
-var makeCirc = "T";
+var makeCirc = 'T';
 var particle = true;
 var size = 2;
 
@@ -52,20 +52,8 @@ function draw() {
       colors[0],
       colors[1]
     );
-    var g = map(
-      points[i].y * sin(i),
-      -height / 2,
-      height / 2,
-      colors[2],
-      colors[3]
-    );
-    var b = map(
-      points[i].y * cos(i),
-      -width / 2,
-      width / 2,
-      colors[4],
-      colors[5]
-    );
+    var g = map(points[i].y * sin(i), -height / 2, height / 2, colors[2], colors[3]);
+    var b = map(points[i].y * cos(i), -width / 2, width / 2, colors[4], colors[5]);
     var alpha = map(
       dist(width / 2, height / 2, points[i].x, points[i].y),
       0,
@@ -76,17 +64,11 @@ function draw() {
 
     fill(r, g, b);
 
-    var angle = map(
-      noise(points[i].x * speed, points[i].y * speed),
-      0,
-      1,
-      0,
-      720
-    );
+    var angle = map(noise(points[i].x * speed, points[i].y * speed), 0, 1, 0, 720);
 
     points[i].add(createVector(cos(angle), sin(angle)));
 
-    if (makeCirc == "F") {
+    if (makeCirc == 'F') {
       ellipse(points[i].x, points[i].y, 1);
     } else {
       if (dist(0, 0, points[i].x, points[i].y) > width / 6.1) {
@@ -112,10 +94,10 @@ function draw() {
       background(30);
     }
     if (frameCount > 1200) {
-      makeCirc = "F";
+      makeCirc = 'F';
     }
 
-    redraw();
+    //redraw();
   }
   console.log(frameCount);
 }

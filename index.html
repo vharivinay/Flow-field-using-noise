@@ -1,0 +1,181 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flow Fields</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <script src="libraries/CCapture.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <div class="container">
+  <p class="text-justify text-secondary">
+    <strong>Note: </strong> For best experience, please view this on a larger screen,
+    i.e., desktop or a tablet. Although it is responsive, because of the interactive
+    elements it becomes uneasy to use.
+  </p>
+  <h2>Generating Flow Fields with Perlin Noise</h2>
+  <div class="row border border-info rounded p-2">
+    <div class='row'>
+    <div class="col-xl-9">
+      <div class="container">
+        <div id="sketch-holder">
+          <!-- Main Sketch -->
+          <script src="sketch.js"></script>
+          <!-- Other Scripts -->
+          <script src="particle.js"></script>
+          <script src="ui.js"></script>
+        </div>
+        <div class="text-justify">
+          <div id="button-container">
+            <button type="button" class="btn btn-primary btn-sm" id="toggleLoop">
+              Play / Pause
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="record">
+              Record
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="saveFrame">
+              Save Frame
+            </button>
+            <button type="button" class="btn btn-outline-dark disabled" id="fps">
+              FPS:
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3">
+      <div class="text-justify">
+        <h3>Controls</h3>
+      </div>
+      <div id="control-holder">
+        <div id="radio-holder" class="p-1">
+          <h6>Path Visual</h6>
+          <input
+            type="radio"
+            id="particle"
+            value="particle"
+            onChange="radioHandler(this);"
+            name="path"
+          />
+          <label for="path" class="border-right p-2">Particle</label>
+          <input
+            type="radio"
+            id="trace"
+            value="trace"
+            name="path"
+            onChange="radioHandler(this);"
+            checked="true"
+          />
+          <label for="path">Trace</label><br />
+        </div>
+        <div id="coloring-radio-holder">
+          <h6>Coloring Method</h6>
+          <input
+            type="radio"
+            id="randomColor"
+            value="randomColor"
+            onChange="radioHandler(this);"
+            name="coloring"
+            checked="true"
+          />
+          <label for="coloring" class="border-right p-2">Random</label>
+          <input
+            type="radio"
+            id="angleColor"
+            value="angleColor"
+            onChange="radioHandler(this);"
+            name="coloring"
+          />
+          <label for="coloring" class="border-right p-2">Angle</label>
+          <input
+            type="radio"
+            id="gridColor"
+            value="gridColor"
+            onChange="radioHandler(this);"
+            name="coloring"
+          />
+          <label for="coloring">Grid</label><br />
+        </div>
+        <div id="slider-container">
+          <h6>Slider Controls</h6>
+          <label for="numParticles" class="form-label">Number of Particles</label><br />
+          <input
+            type="range"
+            class="form-range"
+            min="25"
+            max="5000"
+            value="1000"
+            step="25"
+            id="numParticles"
+            name="numParticles"
+            oninput="this.nextElementSibling.value = this.value"
+          /><output class="pl-4" id="numParticles">1000</output><br />
+          <label for="size" class="form-label">Size Multiplier</label><br />
+          <input
+            type="range"
+            class="form-range"
+            min="1"
+            max="5"
+            value="1"
+            step="0.25"
+            id="size"
+            name="size"
+            oninput="this.nextElementSibling.value = this.value"
+          /><output class="pl-4" id="size">1</output><br />
+          <label for="speed" class="form-label">Speed Multiplier</label><br />
+          <input
+            type="range"
+            class="form-range"
+            min="1"
+            max="5"
+            value="1"
+            step="0.25"
+            id="speed"
+            name="speed"
+            oninput="this.nextElementSibling.value = this.value"
+          /><output class="pl-4" id="speed">1</output><br />
+          <label for="noiseScale" class="form-label">Noise Scale</label><br />
+          <input
+            type="range"
+            class="form-range"
+            min="10"
+            max="10000"
+            value="1000"
+            step="10"
+            id="noiseScale"
+            name="noiseScale"
+            oninput="this.nextElementSibling.value = this.value"
+          /><output class="pl-4" id="noiseScale">1000</output><br />
+          <label for="noiseStrength" class="form-label">Noise Strength</label><br />
+          <input
+            type="range"
+            class="form-range"
+            min="10"
+            max="10000"
+            value="1500"
+            step="10"
+            id="noiseStrength"
+            name="noiseStrength"
+            oninput="this.nextElementSibling.value = this.value"
+          /><output class="pl-4" id="noiseStrength">1500</output><br />
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+ 
