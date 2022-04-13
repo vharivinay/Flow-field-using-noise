@@ -74,9 +74,6 @@ function draw() {
     capturer.stop();
     capturer.save();
   }
-
-  fps = select('#fps');
-  fps.html('FPS: ' + str(round(frameRate())));
 }
 
 function initSketch() {

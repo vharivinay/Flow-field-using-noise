@@ -24,7 +24,7 @@
     elements it becomes uneasy to use.
   </p>
   <h2>Generating Flow Fields with Perlin Noise</h2>
-  <div class="row border border-info rounded p-2">
+  <div class="row p-2">
     <div class='row'>
     <div class="col-xl-9">
       <div class="container">
@@ -34,22 +34,6 @@
           <!-- Other Scripts -->
           <script src="particle.js"></script>
           <script src="ui.js"></script>
-        </div>
-        <div class="text-justify">
-          <div id="button-container">
-            <button type="button" class="btn btn-primary btn-sm" id="toggleLoop">
-              Play / Pause
-            </button>
-            <button type="button" class="btn btn-secondary btn-sm" id="record">
-              Record
-            </button>
-            <button type="button" class="btn btn-secondary btn-sm" id="saveFrame">
-              Save Frame
-            </button>
-            <button type="button" class="btn btn-outline-dark disabled" id="fps">
-              FPS:
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -78,6 +62,7 @@
           />
           <label for="path">Trace</label><br />
         </div>
+        <hr>
         <div id="coloring-radio-holder">
           <h6>Coloring Method</h6>
           <input
@@ -106,6 +91,7 @@
           />
           <label for="coloring">Grid</label><br />
         </div>
+        <hr>
         <div id="slider-container">
           <h6>Slider Controls</h6>
           <label for="numParticles" class="form-label">Number of Particles</label><br />
@@ -168,6 +154,22 @@
             name="noiseStrength"
             oninput="this.nextElementSibling.value = this.value"
           /><output class="pl-4" id="noiseStrength">1500</output><br />
+        </div>
+        <hr>
+        <div class="text-justify">
+          <div id="button-container">
+            <button type="button" class="btn btn-primary btn-sm" id="toggleLoop">
+              Play / Pause
+            </button>
+            <p></p>
+            <button type="button" class="btn btn-secondary btn-sm" id="record">
+              Toggle Record
+            </button>
+            <p></p>
+            <button type="button" class="btn btn-secondary btn-sm" id="saveFrame">
+              Save Frame
+            </button>
+          </div>
         </div>
       </div>
     </div>
