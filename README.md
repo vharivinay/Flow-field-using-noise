@@ -1,10 +1,9 @@
 # Flow field using noise
 
+## [Link to Live App](https://vharivinay.github.io/Flow-field-using-noise/)
+
 ## Flow on a 2D plane
 ![Flow field 2D plane](render/flowField.gif)
-
-## Flow Restricted to the circumference of a circle
-![Flow restricted to circle edge](render/flowField-circle.gif)
 
 ## How to run the code
 ----
