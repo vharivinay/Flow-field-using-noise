@@ -9,10 +9,12 @@ function setupUI() {
   record.mousePressed(toggleRecord);
   snap = select('#saveFrame');
   snap.mousePressed(saveImage);
+  fps = select('#fps');
 
   // Radio Buttons
   path = document.getElementsByName('path');
   coloring = document.getElementsByName('coloring');
+  display = document.getElementsByName('display');
 
   // Sliders
   numParticles = select('#numParticles');
@@ -83,4 +85,15 @@ function captureFrame() {
     'flowField_' + str(year()) + str(month() + day() + hour() + minute() + second());
   saveCanvas(filename, 'PNG');
 }
- 
+
+function display_static() {
+  loop();
+  record.addClass('invisible');
+  fps.addClass('invisible');
+}
+
+function display_animate() {
+  loop();
+  record.removeClass('invisible');
+  fps.removeClass('invisible');
+}

@@ -1,4 +1,3 @@
- 
 const capturer = new CCapture({
   framerate: 60,
   format: 'webm',
@@ -12,14 +11,7 @@ var numPoints = 500;
 var speed;
 let density;
 
-var colors = [
-  '#bf616a80',
-  '#a3be8c80',
-  '#ebcb8b80',
-  '#88c0d080',
-  '#d0877080',
-  '#5e81ac80',
-];
+var colors = ['#bf616a', '#a3be8c', '#ebcb8b', '#88c0d0', '#d08770', '#5e81ac'];
 
 let isLoop, isRecording, save;
 let p5Canvas;
@@ -39,6 +31,7 @@ function setup() {
   freshFrame = true;
 
   initSketch();
+  //noLoop();
 }
 
 function draw() {
@@ -59,9 +52,21 @@ function draw() {
 
   numOfParticles();
 
-  for (let point of points) {
-    point.show();
-    point.update();
+  for (i = 0; i < display.length; i++) {
+    if (display[i].checked) {
+      var display_type = display[i].value;
+    }
+  }
+
+  if (display_type == 'static') {
+    for (let point of points) {
+      point.displayStatic();
+    }
+  } else if ((display_type = 'animate')) {
+    for (let point of points) {
+      point.show();
+      point.update();
+    }
   }
 
   if (isRecording) {
@@ -76,18 +81,23 @@ function draw() {
     capturer.stop();
     capturer.save();
   }
+  fps.html('FPS: ' + str(round(frameRate())));
+
+  if (display_type == 'static') {
+    noLoop();
+  }
 }
 
 function initSketch() {
   clearCanvas();
   background('#4c566a');
-
   for (let i = 0; i < numParticles.value(); i++) {
     var x = random(width);
     var y = random(height);
     var color = coloringMethod(x, y);
     points.push(new Particle(x, y, color));
   }
+  loop();
 }
 
 function radioHandler(src) {
@@ -105,7 +115,7 @@ function getColorMethod() {
 }
 
 function coloringMethod(x, y) {
-  var coloring_value = this.getColorMethod();
+  var coloring_value = getColorMethod();
   if (coloring_value == 'randomColor') {
     return colors[int(random(colors.length))];
   } else if (coloring_value == 'angleColor') {

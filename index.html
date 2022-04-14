@@ -18,12 +18,25 @@
 
   <body>
     <div class="container">
-  <p class="text-justify text-secondary">
-    <strong>Note: </strong> For best experience, please view this on a larger screen,
-    i.e., desktop or a tablet. Although it is responsive, because of the interactive
-    elements it becomes uneasy to use.
-  </p>
-  <h2>Generating Flow Fields with Perlin Noise</h2>
+  <h4>
+    <span
+      class="badge badge-info dropdown-toggle"
+      data-toggle="collapse"
+      href="#collapseNote"
+      role="button"
+      aria-expanded="false"
+      aria-controls="collapseNote"
+      >Note</span
+    >
+  </h4>
+  <div class="collapse" id="collapseNote">
+    <p class="text-justify text-secondary">
+      <strong>Note: </strong> For best experience, please view this on a larger screen,
+      i.e., desktop or a tablet. Although it is responsive, because of the interactive
+      elements it becomes uneasy to use.
+    </p>
+  </div>
+  <h2><a href="https://vharivinay.github.io/generative/flowfiled/" target="_blank">Generating Flow Fields with Perlin Noise</a></h2>
   <div class="row p-2">
     <div class='row'>
     <div class="col-xl-9">
@@ -42,6 +55,26 @@
         <h3>Controls</h3>
       </div>
       <div id="control-holder">
+        <div id="play-type" class="p-1">
+          <h6>Display Type</h6>
+          <input
+            type="radio"
+            id="static"
+            value="static"
+            onChange="display_static(this);"
+            name="display"
+            checked="true"
+          />
+          <label for="path" class="border-right p-2">Static</label>
+          <input
+            type="radio"
+            id="animate"
+            value="animate"
+            name="display"
+            onChange="display_animate(this);"
+          />
+          <label for="path">Animate</label><br />
+        </div>
         <div id="radio-holder" class="p-1">
           <h6>Path Visual</h6>
           <input
@@ -62,7 +95,6 @@
           />
           <label for="path">Trace</label><br />
         </div>
-        <hr>
         <div id="coloring-radio-holder">
           <h6>Coloring Method</h6>
           <input
@@ -91,7 +123,6 @@
           />
           <label for="coloring">Grid</label><br />
         </div>
-        <hr>
         <div id="slider-container">
           <h6>Slider Controls</h6>
           <label for="numParticles" class="form-label">Number of Particles</label><br />
@@ -155,19 +186,30 @@
             oninput="this.nextElementSibling.value = this.value"
           /><output class="pl-4" id="noiseStrength">1500</output><br />
         </div>
+      </div>
         <hr>
         <div class="text-justify">
           <div id="button-container">
             <button type="button" class="btn btn-primary btn-sm" id="toggleLoop">
               Play / Pause
             </button>
-            <p></p>
-            <button type="button" class="btn btn-secondary btn-sm" id="record">
-              Record
-            </button>
-            <p></p>
             <button type="button" class="btn btn-secondary btn-sm" id="saveFrame">
               Save Frame
+            </button><br/>
+            <p></p>
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm invisible"
+              id="record"
+            >
+              Record
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-dark disabled invisible"
+              id="fps"
+            >
+              FPS:
             </button>
           </div>
         </div>
